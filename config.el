@@ -109,8 +109,3 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'after-save-hook 'save-and-commit-config)
 
-;; Load git-roam package
-(use-package! git-roam
-  :after org-roam
-  :config
-  (git-roam-mode +1))
