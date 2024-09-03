@@ -103,7 +103,8 @@ Provides feedback if the commit and push were successful."
                  (string-equal (file-name-nondirectory (buffer-file-name)) "init.el")
                  (string-equal (file-name-nondirectory (buffer-file-name)) "packages.el")))
     (shell-command "git add ~/.doom.d/config.el ~/.doom.d/init.el ~/.doom.d/packages.el")
-    (shell-command "git commit -m 'Auto-commit from Doom Emacs'")
+      (shell-command (format "git commit -m 'Auto-commit: %s'" timestamp))
+
     (shell-command "git push origin main")))  ;; Adjust 'main' if your branch name is different
 
 (add-hook 'after-save-hook 'save-and-commit-config)
