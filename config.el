@@ -109,3 +109,4 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'after-save-hook 'save-and-commit-config)
 
+(setq org-roam-directory "~/roam")
