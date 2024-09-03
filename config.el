@@ -118,3 +118,16 @@ Provides feedback if the commit and push were successful."
   (org-roam-directory (file-truename "~/org-roam"))  ;; Change the directory as needed
   :config
   (org-roam-db-autosync-mode))
+(map! :leader
+      :prefix "n"
+      :desc "Org Roam Find Node" "r" #'org-roam-node-find
+      :desc "Org Roam Capture" "c" #'org-roam-capture
+      :desc "Org Roam Insert Node" "i" #'org-roam-node-insert
+      :desc "Org Roam Graph" "g" #'org-roam-graph)
+(use-package! org-roam-dailies
+  :after org-roam
+  :config
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry "* %?"
+           :target (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%Y-%m-%d>\n")))))
