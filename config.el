@@ -109,3 +109,12 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'after-save-hook 'save-and-commit-config)
 
+;; add org-roam
+(use-package! org-roam
+  :after org
+  :init
+  (setq org-roam-v2-ack t)  ;; Acknowledge the migration to Org-roam v2
+  :custom
+  (org-roam-directory (file-truename "~/org-roam"))  ;; Change the directory as needed
+  :config
+  (org-roam-db-autosync-mode))
