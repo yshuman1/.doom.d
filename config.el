@@ -93,3 +93,17 @@ Provides feedback if the commit and push were successful."
           (lambda ()
             (add-hook 'after-save-hook #'my/org-save-and-commit nil t)
             (add-hook 'kill-buffer-hook #'my/org-save-and-commit nil t)))
+
+
+(defun save-and-commit-config ()
+  "Automatically commit and push changes to Doom Emacs configuration files."
+  (when (and (buffer-file-name)
+             (string-match-p (expand-file-name "~/.doom.d/") (buffer-file-name))
+             (or (string-equal (file-name-nondirectory (buffer-file-name)) "config.el")
+                 (string-equal (file-name-nondirectory (buffer-file-name)) "init.el")
+                 (string-equal (file-name-nondirectory (buffer-file-name)) "packages.el")))
+    (shell-command "git add ~/.doom.d/config.el ~/.doom.d/init.el ~/.doom.d/packages.el")
+    (shell-command "git commit -m 'Auto-commit from Doom Emacs'")
+    (shell-command "git push origin main")))  ;; Adjust 'main' if your branch name is different
+
+(add-hook 'after-save-hook 'save-and-commit-config)
