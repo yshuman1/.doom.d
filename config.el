@@ -96,15 +96,16 @@ Provides feedback if the commit and push were successful."
 
 
 (defun save-and-commit-config ()
-  "Automatically commit and push changes to Doom Emacs configuration files."
+  "Automatically commit and push changes to Doom Emacs configuration files with a timestamp."
   (when (and (buffer-file-name)
              (string-match-p (expand-file-name "~/.doom.d/") (buffer-file-name))
              (or (string-equal (file-name-nondirectory (buffer-file-name)) "config.el")
                  (string-equal (file-name-nondirectory (buffer-file-name)) "init.el")
                  (string-equal (file-name-nondirectory (buffer-file-name)) "packages.el")))
-    (shell-command "git add ~/.doom.d/config.el ~/.doom.d/init.el ~/.doom.d/packages.el")
+    (let ((timestamp (format-time-string "%Y-%m-%d %H:%M:%S")))
+      (shell-command "git add ~/.doom.d/config.el ~/.doom.d/init.el ~/.doom.d/packages.el")
       (shell-command (format "git commit -m 'Auto-commit: %s'" timestamp))
-
-    (shell-command "git push origin main")))  ;; Adjust 'main' if your branch name is different
+      (shell-command "git push origin main"))))  ;; Adjust 'main' if your branch name is different
 
 (add-hook 'after-save-hook 'save-and-commit-config)
+test
