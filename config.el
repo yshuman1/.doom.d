@@ -108,4 +108,3 @@ Provides feedback if the commit and push were successful."
       (shell-command "git push origin main"))))  ;; Adjust 'main' if your branch name is different
 
 (add-hook 'after-save-hook 'save-and-commit-config)
-test
