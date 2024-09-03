@@ -109,4 +109,34 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'after-save-hook 'save-and-commit-config)
 
-(setq org-roam-directory "~/roam")
+;; configuring mu4e for setting up gmail
+(after! mu4e
+  (setq mu4e-maildir (expand-file-name "~/.mail/gmail")
+        mu4e-get-mail-command "mbsync -a"
+        mu4e-update-interval 300
+        mu4e-view-show-images t
+        mu4e-view-show-addresses t
+        mu4e-compose-signature-auto-include nil
+        mu4e-change-filenames-when-moving t
+        mu4e-attachment-dir "~/Downloads"
+
+        ;; Contexts
+        mu4e-contexts
+        `(,(make-mu4e-context
+            :name "Gmail"
+            :match-func (lambda (msg)
+                          (when msg
+                            (mu4e-message-contact-field-matches
+                             msg '(:from :to :cc :bcc) "yasinuveritech@gmail.com")))
+            :vars '((user-mail-address      . "yasinuveritech@gmail.com")
+                    (user-full-name         . "Yasin Shuman")
+                    (mu4e-drafts-folder     . "/gmail/[Gmail]/Drafts")
+                    (mu4e-sent-folder       . "/gmail/[Gmail]/Sent Mail")
+                    (mu4e-trash-folder      . "/gmail/[Gmail]/Trash")
+                    (mu4e-refile-folder     . "/gmail/[Gmail]/All Mail")
+                    (mu4e-sent-messages-behavior . delete)))))
+
+  ;; Ensure mu4e gets reloaded after sync
+  (add-hook 'mu4e-index-updated-hook #'mu4e~proc-kill)
+  (add-hook 'mu4e-view-mode-hook #'visual-line-mode)
+  (add-hook 'mu4e-compose-mode-hook #'flyspell-mode))
