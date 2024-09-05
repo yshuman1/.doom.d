@@ -136,4 +136,4 @@ Provides feedback if the commit and push were successful."
                     (mu4e-sent-folder       . "/gmail/[Gmail]/Sent Mail")
                     (mu4e-trash-folder      . "/gmail/[Gmail]/Trash")
                     (mu4e-refile-folder     . "/gmail/[Gmail]/All Mail")
-                    (mu4e-sent-messages-behavior . delete)))))
+                    (mu4e-sent-messages-behavior . delete))))))
