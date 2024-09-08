@@ -150,17 +150,19 @@ Provides feedback if the commit and push were successful."
         org-roam-ui-open-on-start t))
 
 ;; sets up shell so that it starts in a window in the bottom 20% of the screen
-;; Function to open shell in bottom 20% window
+;; Function to open shell in a bottom 20% window
 (defun my/open-shell-in-bottom-20 ()
-  "Open shell in a window that takes up 20% of the screen, if not already running."
+  "Open shell in a window that takes up 20% of the screen."
   (interactive)
   (let ((shell-buffer (get-buffer "*shell*")))
     (if shell-buffer
+        ;; If shell buffer exists, just switch to it
         (pop-to-buffer shell-buffer)
-      (let ((new-window (split-window-vertically (floor (* 0.2 (window-height))))))
-        (select-window new-window)
-        (shell)))))
+      ;; Otherwise, split window and open shell
+      (progn
+        (select-window (split-window-below)) ;; Split window below
+        (shrink-window (- (window-height) (floor (* 0.2 (frame-height))))) ;; Resize to 20%
+        (shell))))) ;; Open shell
 
-
-;; Bind this function to Option + s (or any key combination you prefer)
+;; Bind this function to Option + s
 (global-set-key (kbd "M-s") 'my/open-shell-in-bottom-20)
