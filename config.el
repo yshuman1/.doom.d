@@ -137,3 +137,14 @@ Provides feedback if the commit and push were successful."
                     (mu4e-trash-folder      . "/gmail/[Gmail]/Trash")
                     (mu4e-refile-folder     . "/gmail/[Gmail]/All Mail")
                     (mu4e-sent-messages-behavior . delete))))))
+
+;; sets up org-roam-ui
+(use-package! org-roam-ui
+  :after org-roam
+  ;; Defer org-roam-ui-mode loading until Org-roam is loaded
+  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
