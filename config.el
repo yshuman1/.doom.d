@@ -152,11 +152,14 @@ Provides feedback if the commit and push were successful."
 ;; sets up shell so that it starts in a window in the bottom 20% of the screen
 ;; Function to open shell in bottom 20% window
 (defun my/open-shell-in-bottom-20 ()
-  "Open shell in a window that takes up 20% of the screen."
+  "Open shell in a window that takes up 20% of the screen, if not already running."
   (interactive)
-  (let ((new-window (split-window-vertically (floor (* 0.2 (window-height))))))
-    (select-window new-window)
-    (shell)))
+  (let ((shell-buffer (get-buffer "*shell*")))
+    (if shell-buffer
+        (pop-to-buffer shell-buffer)
+      (let ((new-window (split-window-vertically (floor (* 0.2 (window-height))))))
+        (select-window new-window)
+        (shell)))))
 
-;; Override the default `shell` command to use the new function
-(advice-add 'shell :override #'my/open-shell-in-bottom-20)
+;; Bind this function to M-x shell
+(global-set-key (kbd "M-x shell") 'my/open-shell-in-bottom-20)
