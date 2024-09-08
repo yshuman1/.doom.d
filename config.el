@@ -161,5 +161,5 @@ Provides feedback if the commit and push were successful."
         (select-window new-window)
         (shell)))))
 
-;; Bind this function to M-x shell
-(global-set-key (kbd "M-x shell") 'my/open-shell-in-bottom-20)
+;; Optional: Bind this function to a custom keybinding, e.g., F12
+(global-set-key (kbd "<f12>") 'my/open-shell-in-bottom-20)
