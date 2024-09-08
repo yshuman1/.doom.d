@@ -161,5 +161,6 @@ Provides feedback if the commit and push were successful."
         (select-window new-window)
         (shell)))))
 
-;; Optional: Bind this function to a custom keybinding, e.g., F12
-(global-set-key (kbd "<f12>") 'my/open-shell-in-bottom-20)
+
+;; Bind this function to Option + s (or any key combination you prefer)
+(global-set-key (kbd "M-s") 'my/open-shell-in-bottom-20)
