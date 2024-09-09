@@ -161,3 +161,16 @@ Provides feedback if the commit and push were successful."
 ;;        (insert (format "#+LAST_UPDATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))))
 
 ;;(add-hook 'before-save-hook #'my/org-roam-update-last-modified)
+(defun remove-org-roam-metadata ()
+  "Remove Org-roam specific metadata like #+title, PROPERTIES, and ID from the current buffer."
+  (interactive)
+  (save-excursion
+    ;; Remove #+title: line
+    (goto-char (point-min))
+    (when (re-search-forward "^#\\+title:.*$" nil t)
+      (replace-match ""))
+
+    ;; Remove PROPERTIES block
+    (goto-char (point-min))
+    (while (re-search-forward "^:PROPERTIES:\n\\(:.*\\(\n\\|\\)\\)*:END:" nil t)
+      (replace-match ""))))
