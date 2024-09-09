@@ -167,3 +167,7 @@ Provides feedback if the commit and push were successful."
 ;; Bind this function to Option + s
 (global-set-key (kbd "M-s") 'my/open-shell-in-bottom-20)
 
+;; Set a custom ASCII banner for Doom Emacs from a file
+(setq +doom-dashboard-ascii-banner-fn
+      (lambda ()
+        (insert-file-contents "/Users/yasinshuman/Library/CloudStorage/OneDrive-Uveritech/chrome downloads/ascii-art.txt")))
