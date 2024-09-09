@@ -175,3 +175,8 @@ Provides feedback if the commit and push were successful."
     (goto-char (point-min))
     (while (re-search-forward "^:PROPERTIES:\n\\(:.*\\(\n\\|\\)\\)*:END:" nil t)
       (replace-match ""))))
+
+
+(setq org-agenda-custom-commands
+      '(("c" "All TODOs"
+         ((todo "")))))
