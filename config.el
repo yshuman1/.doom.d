@@ -41,7 +41,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-(setq org-roam-directory "~/roam/")
+;;(setq org-roam-directory "~/roam/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -112,15 +112,15 @@ Provides feedback if the commit and push were successful."
 
 
 ;; sets up org-roam-ui
-(use-package! org-roam-ui
-  :after org-roam
-  ;; Defer org-roam-ui-mode loading until Org-roam is loaded
-  :hook (after-init . org-roam-ui-mode)
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t))
+;;(use-package! org-roam-ui
+;; :after org-roam
+;;  ;; Defer org-roam-ui-mode loading until Org-roam is loaded
+;;  :hook (after-init . org-roam-ui-mode)
+;;  :config
+;;  (setq org-roam-ui-sync-theme t
+;;        org-roam-ui-follow t
+;;        org-roam-ui-update-on-save t
+;;        org-roam-ui-open-on-start t))
 
 ;; sets up shell so that it starts in a window in the bottom 20% of the screen
 ;; Function to open shell in a bottom 20% window
@@ -141,23 +141,23 @@ Provides feedback if the commit and push were successful."
 (global-set-key (kbd "M-s") 'my/open-shell-in-bottom-20)
 
 ;;timestamp created on org-roam notes
-(defun my/org-roam-create-note-timestamp ()
-  "Insert a CREATED timestamp in new Org-roam notes."
-  (save-excursion
-    (goto-char (point-min))
-    (insert (format "#+CREATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))
+;;(defun my/org-roam-create-note-timestamp ()
+;; "Insert a CREATED timestamp in new Org-roam notes."
+;;  (save-excursion
+;;    (goto-char (point-min))
+;;    (insert (format "#+CREATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))
 
-(add-hook 'org-roam-capture-new-node-hook #'my/org-roam-create-note-timestamp)
+;; (add-hook 'org-roam-capture-new-node-hook #'my/org-roam-create-note-timestamp)
 
 ;;timestamp org-roam notes when last updated
-(defun my/org-roam-update-last-modified ()
-  "Update the LAST_UPDATED timestamp in the current file."
-  (when (org-roam-buffer-p)
-    (save-excursion
-      (goto-char (point-min))
-      (if (re-search-forward "^#\\+LAST_UPDATED:.*$" (point-max) t)
-          (replace-match (format "#+LAST_UPDATED: %s" (format-time-string "[%Y-%m-%d %a %H:%M]")))
-        (goto-char (point-min))
-        (insert (format "#+LAST_UPDATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))))
+;; (defun my/org-roam-update-last-modified ()
+;;  "Update the LAST_UPDATED timestamp in the current file."
+;; (when (org-roam-buffer-p)
+;;    (save-excursion
+;;      (goto-char (point-min))
+;;      (if (re-search-forward "^#\\+LAST_UPDATED:.*$" (point-max) t)
+;;          (replace-match (format "#+LAST_UPDATED: %s" (format-time-string "[%Y-%m-%d %a %H:%M]")))
+;;        (goto-char (point-min))
+;;        (insert (format "#+LAST_UPDATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))))
 
-(add-hook 'before-save-hook #'my/org-roam-update-last-modified)
+;;(add-hook 'before-save-hook #'my/org-roam-update-last-modified)
