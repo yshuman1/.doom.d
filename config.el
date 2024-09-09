@@ -167,8 +167,3 @@ Provides feedback if the commit and push were successful."
 ;; Bind this function to Option + s
 (global-set-key (kbd "M-s") 'my/open-shell-in-bottom-20)
 
-;; open excel files from inside emacs
-(use-package emacs-libxlsx
-  :straight t
-  :config
-  (require 'xlsx))
