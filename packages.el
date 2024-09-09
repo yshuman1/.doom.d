@@ -49,4 +49,3 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 (package! org-roam-ui)
-(package! emacs-libxlsx :recipe (:host github :repo "ndw/emacs-libxlsx"))
