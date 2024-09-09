@@ -43,7 +43,8 @@
 (setq org-directory "~/org/")
 
 ;; set a org-roam directory
-(setq org-roam-directory "~/roam")
+;;(setq org-roam-directory "~/roam")
+(setq org-roam-directory (file-truename "~/path/to/roam/"))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
