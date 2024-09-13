@@ -205,3 +205,13 @@ Provides feedback if the commit and push were successful."
   :after org)
 
 (setq org-plantuml-jar-path (expand-file-name "/opt/homebrew/opt/plantuml/libexec/plantuml.jar"))
+
+(defun my/org-paste-image ()
+  "Paste an image from clipboard into the current Org buffer."
+  (interactive)
+  (let ((filename (concat (make-temp-name "screenshot_") ".png")))
+    (shell-command (concat "pngpaste " filename))
+    (insert (concat "[[file:" filename "]]"))
+    (org-display-inline-images)))
+
+(global-set-key (kbd "C-c C-x C-i") 'my/org-paste-image)
