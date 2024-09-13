@@ -179,7 +179,7 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'before-save-hook #'my/org-roam-update-last-modified)
 (defun remove-org-roam-metadata ()
- "Remove Org-roam specific metadata like #+title, PROPERTIES, and ID from the current buffer."
+  "Remove Org-roam specific metadata like #+title, PROPERTIES, and ID from the current buffer."
   (interactive)
   (save-excursion
     ;; Remove #+title: line
