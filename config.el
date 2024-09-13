@@ -240,6 +240,5 @@ Provides feedback if the commit and push were successful."
         '(("m" "Meeting Recording" plain
            "* %<%Y-%m-%d>\n:PROPERTIES:\n:Attendees: %^{Attendees}\n:END:\n\n** Summary\n%?\n\n** Video Link\n%^{Video Link}"
            :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+filetags: %? %\\2\n")
-           :unnarrowed t
-           :filetags t))))
+                              "#+title: ${title}\n#+filetags: :%^{Filetags|}:")
+           :unnarrowed t))))
