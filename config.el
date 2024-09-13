@@ -198,3 +198,10 @@ Provides feedback if the commit and push were successful."
 
 ;;allow images in emacs web
 (setq shr-inhibit-images nil)  ; Enable images in EWW
+
+(setq org-preview-latex-default-process 'dvisvgm)
+
+(use-package! ob-dot
+  :after org)
+
+(setq org-plantuml-jar-path (expand-file-name "/opt/homebrew/opt/plantuml/libexec/plantuml.jar"))
