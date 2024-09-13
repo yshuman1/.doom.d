@@ -112,15 +112,16 @@ Provides feedback if the commit and push were successful."
 
 
 ;; sets up org-roam-ui
-;;(use-package! org-roam-ui
-;; :after org-roam
-;;  ;; Defer org-roam-ui-mode loading until Org-roam is loaded
-;;  :hook (after-init . org-roam-ui-mode)
-;;  :config
-;;  (setq org-roam-ui-sync-theme t
-;;        org-roam-ui-follow t
-;;        org-roam-ui-update-on-save t
-;;        org-roam-ui-open-on-start t))
+(use-package! org-roam-ui
+  :after org-roam
+  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+
+
 
 ;; sets up shell so that it starts in a window in the bottom 20% of the screen
 ;; Function to open shell in a bottom 20% window
