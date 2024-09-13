@@ -179,3 +179,14 @@ Provides feedback if the commit and push were successful."
 (setq org-agenda-custom-commands
       '(("c" "All TODOs"
          ((todo "")))))
+
+;; setup for inline images
+;; Automatically display images when opening org files
+(setq org-startup-with-inline-images t)
+
+;; Refresh images after executing code blocks
+(add-hook 'org-babel-after-execute-hook #'org-redisplay-inline-images)
+
+;; Adjust how images are displayed
+(setq org-image-actual-width nil)  ; Use actual image width
+;; (setq org-image-actual-width 600)  ; Set a specific width
