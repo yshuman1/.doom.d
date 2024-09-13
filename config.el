@@ -234,3 +234,11 @@ Provides feedback if the commit and push were successful."
 (global-set-key (kbd "C-c C-x C-i") 'my/org-paste-image)
 
 
+;; create org-roam fathom mtg recording template
+(after! org-roam
+  (setq org-roam-capture-templates
+        '(("m" "Meeting Recording" plain
+           "* %<%Y-%m-%d> %^{Title}\n:PROPERTIES:\n:Attendees: %^{Attendees}\n:Tags: %^{Tags}\n:END:\n\n** Summary\n%?\n\n** Video Link\n%^{Video Link}"
+           :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: mtg recordings\n#+filetags: %^{Tags}\n")
+           :unnarrowed t))))
