@@ -235,10 +235,10 @@ Provides feedback if the commit and push were successful."
 
 
 ;; create org-roam fathom mtg recording template
-(defun my/org-roam-format-tags (tags)
-  "Format the TAGS string by wrapping each tag with colons."
-  (mapconcat (lambda (tag) (format ":%s:" (string-trim tag)))
-             (split-string tags)
+(defun my/org-format-tags (tag-string)
+  "Format the TAG-STRING by adding colons around each tag."
+  (mapconcat (lambda (tag) (concat ":" (string-trim tag) ":"))
+             (split-string tag-string)
              " "))
 
 (after! org-roam
@@ -246,5 +246,5 @@ Provides feedback if the commit and push were successful."
         '(("m" "Meeting Recording" plain
            "* %<%Y-%m-%d>\n:PROPERTIES:\n:Attendees: %^{Attendees}\n:END:\n\n** Summary\n%?\n\n** Video Link\n%^{Video Link}"
            :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+filetags: %(my/org-roam-format-tags \"%^{Filetags}\")")
+                              "#+title: ${title}\n#+filetags: %(my/org-format-tags \"%^{Filetags}\")")
            :unnarrowed t))))
