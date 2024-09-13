@@ -110,6 +110,22 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'after-save-hook 'save-and-commit-config)
 
+;;save org-roam nodes to github 
+(defun my-auto-commit-and-push-org-roam ()
+  "Automatically commit and push Org-roam changes to GitHub with a timestamp in the commit message."
+  (when (and (boundp 'org-roam-directory)
+             (string-prefix-p (expand-file-name org-roam-directory)
+                              (buffer-file-name)))
+    (let ((default-directory org-roam-directory)
+          (commit-message (format "Auto-commit: %s" (format-time-string "%Y-%m-%d %H:%M:%S"))))
+      (shell-command "git add .")
+      (shell-command (format "git commit -m '%s'" commit-message))
+      (shell-command "git push"))))
+
+;; Add the function to the Org-mode save hook
+(add-hook 'after-save-hook 'my-auto-commit-and-push-org-roam)
+
+
 
 ;; sets up org-roam-ui
 (use-package! org-roam-ui
@@ -163,7 +179,7 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'before-save-hook #'my/org-roam-update-last-modified)
 (defun remove-org-roam-metadata ()
-  "Remove Org-roam specific metadata like #+title, PROPERTIES, and ID from the current buffer."
+ "Remove Org-roam specific metadata like #+title, PROPERTIES, and ID from the current buffer."
   (interactive)
   (save-excursion
     ;; Remove #+title: line
@@ -216,3 +232,5 @@ Provides feedback if the commit and push were successful."
     (org-display-inline-images)))
 
 (global-set-key (kbd "C-c C-x C-i") 'my/org-paste-image)
+
+
