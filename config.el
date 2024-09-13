@@ -190,3 +190,11 @@ Provides feedback if the commit and push were successful."
 ;; Adjust how images are displayed
 (setq org-image-actual-width nil)  ; Use actual image width
 ;; (setq org-image-actual-width 600)  ; Set a specific width
+
+;;allow images in dired
+(use-package! image-dired
+  :config
+  (setq image-dired-thumb-size 150))
+
+;;allow images in emacs web
+(setq shr-inhibit-images nil)  ; Enable images in EWW
