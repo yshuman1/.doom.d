@@ -235,11 +235,10 @@ Provides feedback if the commit and push were successful."
 
 
 ;; create org-roam fathom mtg recording template
-(defun my/org-format-tags (tag-string)
-  "Format the TAG-STRING by adding colons around each tag."
-  (mapconcat (lambda (tag) (concat ":" (string-trim tag) ":"))
-             (split-string tag-string)
-             " "))
+(defun my/org-format-tags (tags)
+  "Wrap each tag in colons for use in #+filetags."
+  (mapconcat (lambda (tag) (format ":%s:" (string-trim tag)))
+             (split-string tags) " "))
 
 (after! org-roam
   (setq org-roam-capture-templates
