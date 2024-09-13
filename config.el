@@ -238,7 +238,7 @@ Provides feedback if the commit and push were successful."
 (after! org-roam
   (setq org-roam-capture-templates
         '(("m" "Meeting Recording" plain
-           "* %<%Y-%m-%d> %^{Title}\n:PROPERTIES:\n:Attendees: %^{Attendees}\n:Tags: %^{Tags}\n:END:\n\n** Summary\n%?\n\n** Video Link\n%^{Video Link}"
+           "* %<%Y-%m-%d>\n:PROPERTIES:\n:Attendees: %^{Attendees}\n:Tags: %^{Tags}\n:END:\n\n** Summary\n%?\n\n** Video Link\n%^{Video Link}"
            :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: %^{Title}\n#+filetags: %^{Tags}\n")
+                              "#+title: ${title}\n#+filetags: %^{Tags}\n")
            :unnarrowed t))))
