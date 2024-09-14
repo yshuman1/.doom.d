@@ -203,3 +203,4 @@ Provides feedback if the commit and push were successful."
 
 ;; Hook to trigger the function after org-roam capture
 (add-hook 'org-capture-after-finalize-hook #'my-org-roam-move-to-end-of-buffer)
+(setq org-roam-completion t)
