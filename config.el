@@ -43,8 +43,8 @@
 (setq org-directory "~/org/")
 (setq org-roam-directory "~/roam/")  ;; Org-roam directory set to ~/roam
 (setq org-agenda-files
-      (directory-files-recursively "~/org" "\\.org$")
-      (directory-files-recursively "~/roam" "\\.org$"))
+      (append (directory-files-recursively "~/roam" "\\.org$")
+              (directory-files-recursively "~/org" "\\.org$")))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -193,11 +193,11 @@ Provides feedback if the commit and push were successful."
 
 (after! org-roam
   (setq org-roam-capture-templates
-        '(("d" "default" plain
-           "%?"
-           :if-new (file+head "${slug}.org"
-                              "#+title: ${title}\n#+filetags: %^{Filetags}\n* Attendees\n- %^{Attendees}\n* URL\n- %^{URL}")
-           :unnarrowed t))))
+      '(("m" "meeting" plain
+         "%?"
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: %^{filetags}\n#+attendees: %^{attendees}\n#+URL: %^{URL}\n#+meeting-date: %^{Meeting Date}\n\n")
+         :unnarrowed t))))
 
 ;; Function to move cursor to end of buffer after capture
 (defun my-org-roam-move-to-end-of-buffer ()
