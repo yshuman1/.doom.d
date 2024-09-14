@@ -203,3 +203,7 @@ Provides feedback if the commit and push were successful."
 
 ;; Hook to trigger the function after org-roam capture
 (add-hook 'org-capture-after-finalize-hook #'my-org-roam-move-to-end-of-buffer)
+(after! org-roam
+  (setq org-roam-graph-executable "dot"  ;; Ensure "dot" is the executable used to generate the graph
+        org-roam-graph-viewer nil  ;; Set to nil to avoid opening in an external viewer
+        org-roam-graph-extra-config '(("overlap" . "false") ("splines" . "true"))))  ;; Optional Graphviz settings
