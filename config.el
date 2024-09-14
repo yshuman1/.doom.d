@@ -41,7 +41,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-(setq org-roam-directory "~/roam/")
+(setq org-roam-directory "~/roam/")  ;; Org-roam directory set to ~/roam
 (setq org-agenda-files "~/org/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -95,7 +95,6 @@ Provides feedback if the commit and push were successful."
             (add-hook 'after-save-hook #'my/org-save-and-commit nil t)
             (add-hook 'kill-buffer-hook #'my/org-save-and-commit nil t)))
 
-
 (defun save-and-commit-config ()
   "Automatically commit and push changes to Doom Emacs configuration files with a timestamp."
   (when (and (buffer-file-name)
@@ -110,24 +109,16 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'after-save-hook 'save-and-commit-config)
 
-;;save org-roam nodes to github 
-(defun my-auto-commit-and-push-org-roam ()
-  "Automatically commit and push Org-roam changes to GitHub with a timestamp in the commit message."
-  (when (and (boundp 'org-roam-directory)
-             (string-prefix-p (expand-file-name org-roam-directory)
-                              (buffer-file-name)))
-    (let ((default-directory org-roam-directory)
-          (commit-message (format "Auto-commit: %s" (format-time-string "%Y-%m-%d %H:%M:%S"))))
-      (shell-command "git add .")
-      (shell-command (format "git commit -m '%s'" commit-message))
-      (shell-command "git push"))))
+;; Add basic Org-roam configuration without custom node setup
+(use-package! org-roam
+  :after org
+  :custom
+  (org-roam-directory "~/roam/")  ;; Set Org-roam directory to ~/roam
+  :config
+  (org-roam-db-autosync-mode))
+(setq org-roam-file-extensions '("org"))
 
-;; Add the function to the Org-mode save hook
-(add-hook 'after-save-hook 'my-auto-commit-and-push-org-roam)
-
-
-
-;; sets up org-roam-ui
+;; Org-roam UI setup
 (use-package! org-roam-ui
   :after org-roam
   :hook (after-init . org-roam-ui-mode)
@@ -136,8 +127,6 @@ Provides feedback if the commit and push were successful."
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
-
-
 
 ;; sets up shell so that it starts in a window in the bottom 20% of the screen
 ;; Function to open shell in a bottom 20% window
@@ -157,41 +146,8 @@ Provides feedback if the commit and push were successful."
 ;; Bind this function to Option + s
 (global-set-key (kbd "M-s") 'my/open-shell-in-bottom-20)
 
-;;timestamp created on org-roam notes
-(defun my/org-roam-create-note-timestamp ()
-  ;; "Insert a CREATED timestamp in new Org-roam notes."
-  (save-excursion
-    (goto-char (point-min))
-    (insert (format "#+CREATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))
-
-(add-hook 'org-roam-capture-new-node-hook #'my/org-roam-create-note-timestamp)
-
-;;timestamp org-roam notes when last updated
-(defun my/org-roam-update-last-modified ()
-  ;;  "Update the LAST_UPDATED timestamp in the current file."
-  (when (org-roam-buffer-p)
-    (save-excursion
-      (goto-char (point-min))
-      (if (re-search-forward "^#\\+LAST_UPDATED:.*$" (point-max) t)
-          (replace-match (format "#+LAST_UPDATED: %s" (format-time-string "[%Y-%m-%d %a %H:%M]")))
-        (goto-char (point-min))
-        (insert (format "#+LAST_UPDATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))))
-
-(add-hook 'before-save-hook #'my/org-roam-update-last-modified)
-(defun remove-org-roam-metadata ()
-  "Remove Org-roam specific metadata like #+title, PROPERTIES, and ID from the current buffer."
-  (interactive)
-  (save-excursion
-    ;; Remove #+title: line
-    (goto-char (point-min))
-    (when (re-search-forward "^#\\+title:.*$" nil t)
-      (replace-match ""))
-
-    ;; Remove PROPERTIES block
-    (goto-char (point-min))
-    (while (re-search-forward "^:PROPERTIES:\n\\(:.*\\(\n\\|\\)\\)*:END:" nil t)
-      (replace-match ""))))
-
+;; Remove Org-roam node timestamp functions and node metadata functions
+;; Remove any function or hook that was modifying node timestamps or titles
 
 (setq org-agenda-custom-commands
       '(("c" "All TODOs"
@@ -206,7 +162,6 @@ Provides feedback if the commit and push were successful."
 
 ;; Adjust how images are displayed
 (setq org-image-actual-width nil)  ; Use actual image width
-;; (setq org-image-actual-width 600)  ; Set a specific width
 
 ;;allow images in dired
 (use-package! image-dired
@@ -232,5 +187,4 @@ Provides feedback if the commit and push were successful."
     (org-display-inline-images)))
 
 (global-set-key (kbd "C-c C-x C-i") 'my/org-paste-image)
-
 
