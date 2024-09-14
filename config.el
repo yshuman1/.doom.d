@@ -193,5 +193,13 @@ Provides feedback if the commit and push were successful."
         '(("d" "default" plain
            "%?"
            :if-new (file+head "${slug}.org"
-                              "#+title: ${title}\n#+filetags: %^{Filetags}\n* Attendees\n- %^{Attendees}\n* URL\n- %^{URL}\n\n%?")
+                              "#+title: ${title}\n#+filetags: %^{Filetags}\n* Attendees\n- %^{Attendees}\n* URL\n- %^{URL}")
            :unnarrowed t))))
+
+;; Function to move cursor to end of buffer after capture
+(defun my-org-roam-move-to-end-of-buffer ()
+  "Move cursor to the end of the buffer after creating an Org-roam note."
+  (goto-char (point-max)))
+
+;; Hook to trigger the function after org-roam capture
+(add-hook 'org-capture-after-finalize-hook #'my-org-roam-move-to-end-of-buffer)
