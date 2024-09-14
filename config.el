@@ -42,8 +42,6 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 (setq org-roam-directory "~/roam/")  ;; Org-roam directory set to ~/roam
-(setq org-agenda-files "~/org/"
-      " ~/roam")
 (setq org-agenda-files '("~/org/"
                          "~/roam/"))
 
