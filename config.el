@@ -42,8 +42,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 (setq org-roam-directory "~/roam/")  ;; Org-roam directory set to ~/roam
-(setq org-agenda-files '("~/org/"
-                         "~/roam/"))
+(setq org-agenda-files (directory-files-recursively "~/org/" "~/roam/" "\\.org$"))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
