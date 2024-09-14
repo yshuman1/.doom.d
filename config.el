@@ -187,3 +187,11 @@ Provides feedback if the commit and push were successful."
     (org-display-inline-images)))
 
 (global-set-key (kbd "C-c C-x C-i") 'my/org-paste-image)
+
+(after! org-roam
+  (setq org-roam-capture-templates
+        '(("d" "default" plain
+           "%?"
+           :if-new (file+head "${slug}.org"
+                              "#+title: ${title}\n#+filetags: %^{Filetags}\n* Attendees\n- %^{Attendees}\n* URL\n- %^{URL}")
+           :unnarrowed t))))
