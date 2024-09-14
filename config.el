@@ -197,7 +197,7 @@ Provides feedback if the commit and push were successful."
            "%?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                               "#+title: ${title}\n#+filetags: %^{filetags}\n#+attendees: %^{attendees}\n#+meeting-date: %^{Meeting Date}\n\n")
-           :unnarrowed t)))
+           :unnarrowed t))))
 
 
   ;; Function to move cursor to end of buffer after capture
