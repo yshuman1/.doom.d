@@ -200,11 +200,11 @@ Provides feedback if the commit and push were successful."
            :unnarrowed t))))
 
 
-  ;; Function to move cursor to end of buffer after capture
-  (defun my-org-roam-move-to-end-of-buffer ()
-    "Move cursor to the end of the buffer after creating an Org-roam note."
-    (goto-char (point-max)))
+;; Function to move cursor to end of buffer after capture
+(defun my-org-roam-move-to-end-of-buffer ()
+  "Move cursor to the end of the buffer after creating an Org-roam note."
+  (goto-char (point-max)))
 
-  ;; Hook to trigger the function after org-roam capture
-  (add-hook 'org-capture-after-finalize-hook #'my-org-roam-move-to-end-of-buffer)
-  (setq org-roam-completion t)
+;; Hook to trigger the function after org-roam capture
+(add-hook 'org-capture-after-finalize-hook #'my-org-roam-move-to-end-of-buffer)
+(setq org-roam-completion t)
