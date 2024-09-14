@@ -187,27 +187,3 @@ Provides feedback if the commit and push were successful."
     (org-display-inline-images)))
 
 (global-set-key (kbd "C-c C-x C-i") 'my/org-paste-image)
-
-;; Function to insert a CREATED timestamp in new Org-roam notes
-(defun my/org-roam-create-note-timestamp ()
-  "Insert a CREATED timestamp at the top of new Org-roam notes."
-  (save-excursion
-    (goto-char (point-min))
-    (insert (format "#+CREATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))
-
-;; Hook to add the CREATED timestamp when a new Org-roam node is created
-(add-hook 'org-roam-capture-new-node-hook #'my/org-roam-create-note-timestamp)
-
-;; Function to update LAST_UPDATED timestamp before saving the file
-(defun my/org-roam-update-last-modified ()
-  "Update the LAST_UPDATED timestamp in the current Org-roam note."
-  (when (org-roam-buffer-p)
-    (save-excursion
-      (goto-char (point-min))
-      (if (re-search-forward "^#\\+LAST_UPDATED:.*$" (point-max) t)
-          (replace-match (format "#+LAST_UPDATED: %s" (format-time-string "[%Y-%m-%d %a %H:%M]")))
-        (goto-char (point-min))
-        (insert (format "#+LAST_UPDATED: %s\n" (format-time-string "[%Y-%m-%d %a %H:%M]")))))))
-
-;; Hook to update the LAST_UPDATED timestamp before saving the buffer
-(add-hook 'before-save-hook #'my/org-roam-update-last-modified)
