@@ -193,5 +193,5 @@ Provides feedback if the commit and push were successful."
         '(("d" "default" plain
            "%?"
            :if-new (file+head "${slug}.org"
-                              "#+title: ${title}\n#+filetags: %^{Filetags}\n* Attendees\n- %^{Attendees}\n* URL\n- %^{URL}")
+                              "#+title: ${title}\n#+filetags: %^{Filetags}\n* Attendees\n- %^{Attendees}\n* URL\n- %^{URL}\n\n%?")
            :unnarrowed t))))
