@@ -235,15 +235,20 @@ Provides feedback if the commit and push were successful."
 
 
 ;; create org-roam fathom mtg recording template
+;; Function to format tags for #+filetags
 (defun my/org-format-tags (tags)
   "Wrap each tag in colons for use in #+filetags."
   (mapconcat (lambda (tag) (format ":%s:" (string-trim tag)))
              (split-string tags) " "))
 
 (after! org-roam
+  ;; Set org-roam-title-sources to include both #+title and the first headline
+  (setq org-roam-title-sources '(title headline))
+
+  ;; Modify the capture templates
   (setq org-roam-capture-templates
         '(("m" "Meeting Recording" plain
-           "* %<%Y-%m-%d>\n:PROPERTIES:\n:Attendees: %^{Attendees}\n:END:\n\n** Summary\n%?\n\n** Video Link\n%^{Video Link}"
+           "* ${title}\n:PROPERTIES:\n:Attendees: %^{Attendees}\n:END:\n\n** Date\n%<%Y-%m-%d>\n\n** Summary\n%?\n\n** Video Link\n%^{Video Link}"
            :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+filetags: %(my/org-format-tags \"%^{Filetags}\")")
+                              "#+title: ${title}\n#+filetags: %(my/org-format-tags \"%^{Filetags}\")\n")
            :unnarrowed t))))
