@@ -208,3 +208,11 @@ Provides feedback if the commit and push were successful."
 ;; Hook to trigger the function after org-roam capture
 (add-hook 'org-capture-after-finalize-hook #'my-org-roam-move-to-end-of-buffer)
 (setq org-roam-completion t)
+
+(defun my-org-roam-git-pull ()
+  "Perform a git pull in the org-roam directory at startup."
+  (when (file-directory-p "~/roam/")
+    (let ((default-directory "~/roam/"))
+      (shell-command "git pull"))))
+
+(add-hook 'emacs-startup-hook #'my-org-roam-git-pull)
