@@ -216,3 +216,6 @@ Provides feedback if the commit and push were successful."
       (shell-command "git pull"))))
 
 (add-hook 'emacs-startup-hook #'my-org-roam-git-pull)
+
+;;add vterm
+(package! vterm)
