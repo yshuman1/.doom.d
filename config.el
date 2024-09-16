@@ -217,3 +217,10 @@ Provides feedback if the commit and push were successful."
 
 (add-hook 'emacs-startup-hook #'my-org-roam-git-pull)
 
+;; launch open kitty terminal - external
+(defun open-kitty-terminal ()
+  (interactive)
+  (shell-command "kitty &"))
+
+(map! :leader
+      :desc "Open Kitty Terminal" "o t" #'open-kitty-terminal)
