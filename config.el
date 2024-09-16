@@ -226,4 +226,4 @@ Provides feedback if the commit and push were successful."
       :desc "Open Kitty Terminal" "o t" #'open-kitty-terminal)
 ;;modify vterm text color
 (after! vterm
-  (set-face-attribute 'vterm-color-default nil :foreground "green"))
+  (set-face-attribute 'vterm nil :foreground "green"))
