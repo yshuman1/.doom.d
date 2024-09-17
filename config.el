@@ -196,7 +196,7 @@ Provides feedback if the commit and push were successful."
         '(("m" "meeting" plain
            "%?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: %^{Title}\n#+filetags: %^{filetags}\n#+attendees: %^{attendees}\n#+meeting-date: %^{Meeting Date}\n\n")
+                              "#+title: ${slug}\n#+filetags: %^{filetags}\n#+attendees: %^{attendees}\n#+meeting-date: %^{Meeting Date}\n\n")
            :immediate-finish t
            :unnarrowed t))))
 
