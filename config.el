@@ -234,3 +234,8 @@ Provides feedback if the commit and push were successful."
 
   ;; Use macOS clipboard
   (setq org-download-screenshot-method "pngpaste %s"))
+
+;;keybinding for pasting img
+(map! :leader
+      :desc "Paste image from clipboard"
+      "i p" #'org-download-clipboard)
