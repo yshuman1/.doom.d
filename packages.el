@@ -51,3 +51,4 @@
 (package! org-roam-ui)
 ;;add vterm
 (package! vterm)
+(package! org-download)
