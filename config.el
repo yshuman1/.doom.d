@@ -225,3 +225,12 @@ Provides feedback if the commit and push were successful."
 
 (map! :leader
       :desc "Open Kitty Terminal" "o t" #'open-kitty-terminal)
+
+
+;;used for pasting img from clipboard into org file inline
+(after! org-download
+  ;; Set the default directory for images
+  (setq org-download-image-dir "./images")
+
+  ;; Use macOS clipboard
+  (setq org-download-screenshot-method "pngpaste %s"))
